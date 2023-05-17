@@ -13,7 +13,7 @@ node('maven_jdk') {
     
     }
     stage ('junit'){
-        junit '**/TEST-*.xml',
+        junit :'**/TEST-*.xml',
         allowEmptyResults: true
     }
 }
