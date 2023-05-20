@@ -1,5 +1,5 @@
 pipeline  {
-      agent {label 'MAVEN_JDK'}
+    agent {label 'MAVEN_JDK'}
     stages {
         stage('vcs') {
             steps {
@@ -7,18 +7,19 @@ pipeline  {
                     branch: 'declarative'
         }
     }
-    stage('package') {
-        steps {
+        stage('package') {
+         steps {
             sh 'mvn package'
         }
     }
-    stage('post build') {
-        steps {
+        stage('post build') {
+          steps {
             archiveArtifacts artifacts: '**/target/gameoflife.war',
                              onlysuccessful: true
             junit testResult: '**/surefire-report/TEST-*.xml'
         }
     }        
+  }
 }
             
             
