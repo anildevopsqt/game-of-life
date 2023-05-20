@@ -1,13 +1,19 @@
 pipeline  {
     agent {label 'MAVEN_JDK'}
     stages {
-        stage('vcs') {
+        stage('vcs') { 
             steps {
                 git url: 'https://github.com/anildevopsqt/game-of-life.git'
                     branch: 'declarative'
         }
     }
         stage('package') {
+            tools {
+                jdk 'jdk_8'
+            }
+                
+            } 
+            
          steps {
             sh 'mvn package'
         }
@@ -19,36 +25,7 @@ pipeline  {
             junit testResult: '**/surefire-report/TEST-*.xml'
         }
     }        
-  }
-}
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            ' 
-        }
-    }    
+  }  
         
     
         
