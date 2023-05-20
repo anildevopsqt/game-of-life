@@ -1,36 +1,29 @@
-pipeline  {
-    agent {label 'MAVEN_JDK'}
-    stages {
-        stage('vcs') { 
-            steps {
-                git url: 'https://github.com/anildevopsqt/game-of-life.git'
-                    branch: 'declarative'
-        }
+pipeline{
+    agent{
+        label 'maven_jdk'
     }
-        stage('package') {
-            tools {
-                jdk 'jdk_8'
+    stages{
+        stage('vcs'){
+            steps{
+            git branch: 'declarative', url: 'https://github.com/anildevopsqt/game-of-life.git'
             }
-                
-            } 
-            
-         steps {
+        }
+        stage('build'){
+            tools{jdk 'JDK_8'}
+            steps {
             sh 'mvn package'
         }
-    }
-        stage('post build') {
-          steps {
-            archiveArtifacts artifacts: '**/target/gameoflife.war',
-                             onlysuccessful: true
-            junit testResult: '**/surefire-report/TEST-*.xml'
+
         }
-    }        
-  }  
-        
-    
-        
+        stage('postbuild'){
+            steps{
+                archiveArtifacts artifacts: '**/target/gameoflife.war',
+                                 onlyIfSuccessful: true
+                junit testResult: '**/surefire-report/TEST-*.xml',
+                allowEmptyResults : true
+        }
 
-        
-        
-    
-
+        }
+            
+     }
+}
