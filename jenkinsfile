@@ -1,5 +1,6 @@
 pipeline{
     agent{
+        triggers { cron ('H/5 * * * *')}
         label 'maven_jdk'
     }
     stages{
