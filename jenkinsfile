@@ -1,6 +1,9 @@
 pipeline{
-    agent{ label 'maven_jdk'}
+    agent{ label 'maven_jdk'} 
     triggers { cron ('H/15 * * * *')}
+    parameter {
+        string(name:'MAVEN_GOAL', defaultValue:'package', description:'maven goal')
+    }
     stages{
         stage('vcs'){
             steps{
@@ -10,7 +13,7 @@ pipeline{
         stage('build'){
             tools{jdk 'JDK_8'}
             steps {
-            sh 'mvn package'
+            sh "mvn ${params.MAVEN_GOAL}"
         }
 
         }
