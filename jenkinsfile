@@ -15,11 +15,7 @@ pipeline{
             steps {
             sh "mvn ${params.MAVEN_GOAL}"
         }
-        stage('copy build') {
-            steps{
-                sh 'mkdir -p /tmp/$JOB_NAME/${BUILD_ID} && cp ./gameoflife-web/target/gameoflie.war /tmp/$JOB_NAME/${BUILD_ID}/'
-            }
-        }
+                }
         }
         stage('postbuild'){
             steps{
@@ -30,6 +26,19 @@ pipeline{
         }
 
         }
+       post {
+        sucess{
+            mail subject: 'jenkins build of ${JOB_NAME} with id ${BUILD_ID} is sucess',
+                     body: 'use this url $(BUILD_URL) for more info',
+                     to: 'veluru.anil2009@gmail.com',
+                     from:'devopsqt'
+        failure{
+            mail subject: 'jenkins build of ${JOB_NAME} with id ${BUILD_ID} is failure',
+                    body:'use this url ${BUILD_URL} for more info',
+                    to:'veluru.anil2009@gmail.com',
+                    from:'devopsqt'
+        }             
             
+        }
+       }            
      }
-}
