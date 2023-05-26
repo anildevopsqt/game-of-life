@@ -15,7 +15,11 @@ pipeline{
             steps {
             sh "mvn ${params.MAVEN_GOAL}"
         }
-
+        stage('copy build') {
+            steps{
+                sh 'mkdir -p /tmp/$JOB_NAME/${BUILD_ID} && cp ./gameoflife-web/target/gameoflie.war /tmp/$JOB_NAME/${BUILD_ID}/'
+            }
+        }
         }
         stage('postbuild'){
             steps{
