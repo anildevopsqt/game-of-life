@@ -16,14 +16,16 @@ pipeline{
             sh "mvn ${params.MAVEN_GOAL}"
         }
                 }
-        }
-        stage('postbuild'){
+        
+        stage('post build'){
             steps{
                 archiveArtifacts artifacts: '**/target/gameoflife.war',
                                  onlyIfSuccessful: true
                 junit testResults: '**/surefire-report/TEST-*.xml',
                   allowEmptyResults : true
         }
+        }
+        
 
         }
        post {
