@@ -37,7 +37,7 @@ pipeline{
         failure{
             mail subject: "jenkins build of ${JOB_NAME} with id ${BUILD_ID} is failure",
                     body:"use this url ${BUILD_URL} for more info",
-                    to:"${GIT_AUT_EMAI}L",
+                    to:'anil@gmail.com',
                     from:'devopsqt@gmail.com'
         }             
             
