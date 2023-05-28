@@ -25,11 +25,11 @@ pipeline{
                   allowEmptyResults : true
         }
         }
-        
+
 
         }
        post {
-        sucess {
+        success {
             mail subject: "jenkins build of ${JOB_NAME} with id ${BUILD_ID} is sucess",
                      body: "use this url ${BUILD_URL} for more info",
                      to: 'team-All-veluru.anil2009@gmail.com',
