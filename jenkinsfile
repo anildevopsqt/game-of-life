@@ -34,13 +34,14 @@ pipeline{
                      body: "use this url ${BUILD_URL} for more info",
                      to: 'team-All-veluru.anil2009@gmail.com',
                      from:'devopsqt@gmail.com'
-        /* failure{
+        }
+         failure{
             mail subject: "jenkins build of ${JOB_NAME} with id ${BUILD_ID} is failure",
                     body:"use this url ${BUILD_URL} for more info",
                     to:'anil@gmail.com',
                     from:'devopsqt@gmail.com'
-        }*/             
+        }             
             
-        }
+        
        }            
      }
