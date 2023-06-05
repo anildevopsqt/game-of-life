@@ -15,7 +15,8 @@ pipeline{
             steps {
             sh "mvn ${params.MAVEN_GOAL}"
         }
-                }
+        }
+                
         
         stage('post build'){
             steps{
@@ -24,6 +25,8 @@ pipeline{
                 junit testResults: '**/surefire-report/TEST-*.xml',
                   allowEmptyResults: true
            }
+       
         }
     }
+    
 }
